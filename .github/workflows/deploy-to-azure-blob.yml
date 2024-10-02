@@ -1,0 +1,22 @@
+name: Upload image files to Azure Blob
+
+on:
+  push:
+    branches:
+      - main  # メインブランチにプッシュされたときに実行
+
+jobs:
+  upload-to-blob:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Upload to Azure Blob
+      run: |
+        az storage blob upload-batch -d '${{ secrets.AZURE_STORAGE_CONTAINER_NAME }}' --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --account-key ${{ secrets.AZURE_STORAGE_ACCOUNT_KEY }} -s ./images
+      env:
+        AZURE_STORAGE_ACCOUNT_NAME: ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }}
+        AZURE_STORAGE_ACCOUNT_KEY: ${{ secrets.AZURE_STORAGE_ACCOUNT_KEY }}
+        AZURE_STORAGE_CONTAINER_NAME: ${{ secrets.AZURE_STORAGE_CONTAINER_NAME }}
