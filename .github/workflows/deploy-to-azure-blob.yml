@@ -26,4 +26,4 @@ jobs:
 
     - name: Upload to Azure Blob
       run: |
-        az storage blob upload-batch -d 'images' --account-name 0kubost20291002 -s ./images
+        az storage blob upload-batch -d 'images' --account-name 0kubost20291002 -s ./images --auth-mode login
