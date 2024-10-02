@@ -24,10 +24,10 @@ jobs:
         tenant-id: ${{ secrets.AZURE_TENANT_ID }}
         subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
+    - name: Delete all blobs in the Azure 'images' container
+      run: |
+        az storage blob delete-batch -s 'images' --account-name 0kubost20291002 --auth-mode login
+
     - name: Upload to Azure Blob
       run: |
         az storage blob upload-batch -d 'images' --account-name 0kubost20291002 -s ./images --auth-mode login
-    #- name: Create blob container if not exists
-    #  run: |
-    #    az storage container create --name 'images' --account-name 0kubost20291002 --auth-mode login
-
