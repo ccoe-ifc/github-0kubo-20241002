@@ -5,6 +5,10 @@ on:
     branches:
       - main  # メインブランチにプッシュされたときに実行
 
+permissions:  # id-token に書き込み権限を付与
+  id-token: write
+  contents: read
+
 jobs:
   upload-to-blob:
     runs-on: ubuntu-latest
